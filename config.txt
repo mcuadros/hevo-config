@@ -11,6 +11,10 @@ mm_max_arc_error                             0.01             # The maximum erro
                                                               # note it is invalid for both the above be 0
                                                               # if both are used, will use largest segment length based on radius
 
+# Arm solution should be configured as corexy (since hevo is corexy), the suggested changes at
+# http://smoothieware.org/hbot has been made a cross the config file.
+arm_solution                                 corexy
+
 # Arm solution configuration : Cartesian robot. Translates mm positions into stepper positions
 # See http://smoothieware.org/stepper-motors
 alpha_steps_per_mm                           80               # Steps per mm for alpha ( X ) stepper
@@ -29,7 +33,7 @@ x_axis_max_speed                             30000            # Maximum speed in
 y_axis_max_speed                             30000            # Maximum speed in mm/min
 z_axis_max_speed                             300              # Maximum speed in mm/min
 
-# Stepper module configuration 
+# Stepper module configuration
 # Pins are defined as  ports, and pin numbers, appending "!" to the number will invert a pin
 # See http://smoothieware.org/pin-configuration and http://smoothieware.org/pinout
 alpha_step_pin                               2.0              # Pin for alpha stepper step signal
@@ -98,7 +102,7 @@ delta_current                                    1.5          # First extruder s
 ## Laser module configuration
 # See http://smoothieware.org/laser
 laser_module_enable                           false           # Whether to activate the laser module at all
-laser_module_pwm_pin                          2.5             # This pin will be PWMed to control the laser. 
+laser_module_pwm_pin                          2.5             # This pin will be PWMed to control the laser.
                                                               # Only pins 2.0, 2.1, 2.2, 2.3, 2.4, 2.5, 1.18, 1.20, 1.21, 1.23, 1.24, 1.26, 3.25 and 3.26
                                                               # can be used since laser requires hardware PWM, see http://smoothieware.org/pinout
 #laser_module_ttl_pin 	                      1.30            # This pin turns on when the laser turns on, and off when the laser turns off.
@@ -130,7 +134,7 @@ temperature_control.hotend.designator        T                # Designator lette
 #temperature_control.hotend.runaway_cooling_timeout        0  # How long it can take to cool down if temp is set lower, max is 2040 seconds
 #temperature_control.hotend.runaway_range                20   # How far from the set temperature it can wander, max setting is 63°C
 
-# PID configuration 
+# PID configuration
 # See http://smoothieware.org/temperaturecontrol#pid
 #temperature_control.hotend.p_factor         13.7             # P ( proportional ) factor
 #temperature_control.hotend.i_factor         0.097            # I ( integral ) factor
@@ -199,7 +203,7 @@ switch.fan.output_type                       pwm              # PWM output setta
 ## Endstops
 # See http://smoothieware.org/endstops
 endstops_enable                              true             # The endstop module is enabled by default and can be disabled here
-#corexy_homing                               false            # Set to true if homing on a hbot or corexy
+corexy_homing                                true             # Set to true if homing on a hbot or corexy
 alpha_min_endstop                            1.24^            # Pin to read min endstop, add a ! to invert if endstop is NO connected to ground
 #alpha_max_endstop                           1.25^            # Pin to read max endstop, uncomment this and comment the above if using max endstops
 alpha_homing_direction                       home_to_min      # Or set to home_to_max and set alpha_max and uncomment the alpha_max_endstop
