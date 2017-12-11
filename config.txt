@@ -17,9 +17,14 @@ arm_solution                                 corexy
 
 # Arm solution configuration : Cartesian robot. Translates mm positions into stepper positions
 # See http://smoothieware.org/stepper-motors
-alpha_steps_per_mm                           80               # Steps per mm for alpha ( X ) stepper
-beta_steps_per_mm                            80               # Steps per mm for beta ( Y ) stepper
-gamma_steps_per_mm                           1600             # Steps per mm for gamma ( Z ) stepper
+
+# https://www.prusaprinters.org/calculator/
+# Result      Resolution	Teeth Step angle Stepping Belt
+# 160.00      6.25micron	20	  1.8°	     1/32th   2mm
+
+alpha_steps_per_mm                           160               # Steps per mm for alpha ( X ) stepper
+beta_steps_per_mm                            160               # Steps per mm for beta ( Y ) stepper
+gamma_steps_per_mm                           800             # Steps per mm for gamma ( Z ) stepper
 
 # Planner module configuration : Look-ahead and acceleration configuration
 # See http://smoothieware.org/motion-control
@@ -31,7 +36,7 @@ junction_deviation                           0.05             # See http://smoot
 # Cartesian axis speed limits
 x_axis_max_speed                             30000            # Maximum speed in mm/min
 y_axis_max_speed                             30000            # Maximum speed in mm/min
-z_axis_max_speed                             300              # Maximum speed in mm/min
+z_axis_max_speed                             500              # Maximum speed in mm/min
 
 # Stepper module configuration
 # Pins are defined as  ports, and pin numbers, appending "!" to the number will invert a pin
@@ -40,19 +45,19 @@ alpha_step_pin                               2.0              # Pin for alpha st
 alpha_dir_pin                                0.5              # Pin for alpha stepper direction, add '!' to reverse direction
 alpha_en_pin                                 0.4              # Pin for alpha enable pin
 alpha_current                                1.7              # X stepper motor current
-alpha_max_rate                               30000.0          # Maximum rate in mm/min
+alpha_max_rate                               10000.0          # Maximum rate in mm/min
 
 beta_step_pin                                2.1              # Pin for beta stepper step signal
-beta_dir_pin                                 0.11             # Pin for beta stepper direction, add '!' to reverse direction
+beta_dir_pin                                 0.11              # Pin for beta stepper direction, add '!' to reverse direction
 beta_en_pin                                  0.10             # Pin for beta enable
 beta_current                                 1.7              # Y stepper motor current
-beta_max_rate                                30000.0          # Maxmimum rate in mm/min
+beta_max_rate                                10000.0          # Maxmimum rate in mm/min
 
 gamma_step_pin                               2.2              # Pin for gamma stepper step signal
-gamma_dir_pin                                0.20             # Pin for gamma stepper direction, add '!' to reverse direction
+gamma_dir_pin                                0.20              # Pin for gamma stepper direction, add '!' to reverse direction
 gamma_en_pin                                 0.19             # Pin for gamma enable
 gamma_current                                1.7              # Z stepper motor current
-gamma_max_rate                               300.0            # Maximum rate in mm/min
+gamma_max_rate                               500.0            # Maximum rate in mm/min
 
 ## Extruder module configuration
 # See http://smoothieware.org/extruder
