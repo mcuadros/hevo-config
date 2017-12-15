@@ -61,8 +61,13 @@ gamma_max_rate                               500.0            # Maximum rate in 
 
 ## Extruder module configuration
 # See http://smoothieware.org/extruder
+
+# steps_per_mm for MK8 Geetech Kit based on https://reprapchampion.com/pages/mk8-extruder
+# steps_per_mm = (motor_steps_per_rev * driver_microstep) / (hob_effective_diameter * pi)
+# steps_per_mm = 200 * 32 / 10.95*3.14 = 185
+
 extruder.hotend.enable                          true          # Whether to activate the extruder module at all. All configuration is ignored if false
-extruder.hotend.steps_per_mm                    140           # Steps per mm for extruder stepper
+extruder.hotend.steps_per_mm                    185           # Steps per mm for extruder stepper
 extruder.hotend.default_feed_rate               600           # Default rate ( mm/minute ) for moves where only the extruder moves
 extruder.hotend.acceleration                    500           # Acceleration for the stepper motor mm/sec²
 extruder.hotend.max_speed                       50            # Maximum speed in mm/s
@@ -88,7 +93,7 @@ delta_current                                    1.7          # First extruder s
 
 # Second extruder module configuration
 extruder.hotend2.enable                         true         # Whether to activate the extruder module at all. All configuration is ignored if false
-extruder.hotend2.steps_per_mm                   140          # Steps per mm for extruder stepper
+extruder.hotend2.steps_per_mm                   185          # Steps per mm for extruder stepper
 extruder.hotend2.default_feed_rate              600          # Default rate ( mm/minute ) for moves where only the extruder moves
 extruder.hotend2.acceleration                   500          # Acceleration for the stepper motor, as of 0.6, arbitrary ratio
 extruder.hotend2.max_speed                      50           # mm/s
