@@ -128,10 +128,10 @@ laser_module_pwm_pin                          2.5             # This pin will be
 
 # First hotend configuration
 temperature_control.hotend.enable            true             # Whether to activate this ( "hotend" ) module at all.
-temperature_control.hotend.thermistor_pin    0.23             # Pin for the thermistor to read
+temperature_control.hotend.thermistor_pin    0.24             # Pin for the thermistor to read
 temperature_control.hotend.heater_pin        2.7              # Pin that controls the heater, set to nc if a readonly thermistor is being defined
-temperature_control.hotend.thermistor        EPCOS100K        # See http://smoothieware.org/temperaturecontrol#toc5
-#temperature_control.hotend.beta             4066             # Or set the beta value
+#temperature_control.hotend.thermistor        EPCOS100K        # See http://smoothieware.org/temperaturecontrol#toc5
+temperature_control.hotend.beta             3950             # Or set the beta value
 temperature_control.hotend.set_m_code        104              # M-code to set the temperature for this module
 temperature_control.hotend.set_and_wait_m_code 109            # M-code to set-and-wait for this module
 temperature_control.hotend.designator        T0               # Designator letter for this module
@@ -155,9 +155,9 @@ temperature_control.hotend.designator        T0               # Designator lette
 # Second hotend configuration
 temperature_control.hotend2.enable            true           # Whether to activate this ( "hotend" ) module at all.
 temperature_control.hotend2.thermistor_pin    0.25           # Pin for the thermistor to read
-temperature_control.hotend2.heater_pin        1.23           # Pin that controls the heater
-temperature_control.hotend2.thermistor        EPCOS100K      # See http://smoothieware.org/temperaturecontrol#thermistor
-#temperature_control.hotend2.beta             4066           # or set the beta value
+temperature_control.hotend2.heater_pin        2.6          # Pin that controls the heater
+#temperature_control.hotend2.thermistor        EPCOS100K      # See http://smoothieware.org/temperaturecontrol#thermistor
+temperature_control.hotend2.beta             3950           # or set the beta value
 temperature_control.hotend2.set_m_code        104            # M-code to set the temperature for this module
 temperature_control.hotend2.set_and_wait_m_code 109          # M-code to set-and-wait for this module
 temperature_control.hotend2.designator        T1             # Designator letter for this module
@@ -169,7 +169,7 @@ temperature_control.hotend2.designator        T1             # Designator letter
 #temperature_control.hotend2.max_pwm          64              # Max pwm, 64 is a good value if driving a 12v resistor with 24v.
 
 temperature_control.bed.enable               true             # Whether to activate this ( "hotend" ) module at all.
-temperature_control.bed.thermistor_pin       0.24             # Pin for the thermistor to read
+temperature_control.bed.thermistor_pin       0.23             # Pin for the thermistor to read
 temperature_control.bed.heater_pin           2.5              # Pin that controls the heater
 temperature_control.bed.thermistor           Honeywell100K    # See http://smoothieware.org/temperaturecontrol#thermistor
 #temperature_control.bed.beta                3974             # Or set the beta value
@@ -189,7 +189,7 @@ temperature_control.bed.designator           B                # Designator lette
 switch.fan.enable                            true             # Enable this module
 switch.fan.input_on_command                  M106             # Command that will turn this switch on
 switch.fan.input_off_command                 M107             # Command that will turn this switch off
-switch.fan.output_pin                        2.6              # Pin this module controls
+switch.fan.output_pin                        2.4              # Pin this module controls
 switch.fan.output_type                       pwm              # PWM output settable with S parameter in the input_on_comand
 #switch.fan.max_pwm                          255              # Set max pwm for the pin default is 255
 
@@ -214,7 +214,7 @@ switch.fan.output_type                       pwm              # PWM output setta
 # See http://smoothieware.org/endstops
 endstops_enable                              true             # The endstop module is enabled by default and can be disabled here
 corexy_homing                                true             # Set to true if homing on a hbot or corexy
-alpha_min_endstop                            1.241^            # Pin to read min endstop, add a ! to invert if endstop is NO connected to ground
+alpha_min_endstop                            1.24^            # Pin to read min endstop, add a ! to invert if endstop is NO connected to ground
 #alpha_max_endstop                           1.25^            # Pin to read max endstop, uncomment this and comment the above if using max endstops
 alpha_homing_direction                       home_to_min      # Or set to home_to_max and set alpha_max and uncomment the alpha_max_endstop
 alpha_min                                    0                # This gets loaded as the current position after homing when home_to_min is set
@@ -278,32 +278,44 @@ gamma_homing_retract_mm                      1                # Distance to retr
 ## M280 S10.6 Alarm release
 
 switch.servo.enable true
-switch.servo.input_on_command M280 S3.0                     # M280 S7.5 Would be midway
-switch.servo.input_off_command M280 S7.0                    # Same as M280 S0 0% duty cycle, effectivley off
-switch.servo.output_pin 1.23                                # Must be a PWM capable pin
-switch.servo.output_type hwpwm                              # H/W PWM output settable
-switch.servo.pwm_period_ms 20                               # Set Period to 20ms (50Hz) - Default is 50Hz
+switch.servo.input_on_command               M280 S3.0       # M280 S7.5 Would be midway
+switch.servo.input_off_command              M280 S7.0       # Same as M280 S0 0% duty cycle, effectivley off
+switch.servo.output_pin                     1.22            # Must be a PWM capable pin
+switch.servo.output_type                    hwpwm           # H/W PWM output settable
+switch.servo.pwm_period_ms                  20              # Set Period to 20ms (50Hz) - Default is 50Hz
 
 ## Z-probe
 # See http://smoothieware.org/zprobe
-zprobe.enable                                true           # Set to true to enable a zprobe
-zprobe.probe_pin                             1.28^          # Pin probe is attached to, if NC remove the !
-zprobe.slow_feedrate                         5              # Mm/sec probe feed rate
-#zprobe.debounce_count                       100            # Set if noisy
-zprobe.fast_feedrate                         100            # Move feedrate mm/sec
-zprobe.probe_height                          5              # How much above bed to start probe
-gamma_min_endstop                           nc              # Normally 1.28. Change to nc to prevent conflict,
+zprobe.enable                               true                # set to true to enable a zprobe
+#zprobe.probe_pin                            1.28                # pin probe is attached to if NC remove the !
+zprobe.probe_pin                            1.28^               # pin probe is attached to, if NC remove the !
+zprobe.slow_feedrate                        5                   # mm/sec probe feed rate
+zprobe.fast_feedrate                        100                 # move feedrate mm/sec
+zprobe.probe_height                         5                   # how much above bed to start probe
 
 # Levelling strategy
 # Example for 3-point levelling strategy, see wiki documentation for other strategies
-leveling-strategy.three-point-leveling.enable         true        # a leveling strategy that probes three points to define a plane and keeps the Z parallel to that plane
-leveling-strategy.three-point-leveling.point1         295.0,0.0   # the first probe point (x,y) optional may be defined with M557
-leveling-strategy.three-point-leveling.point2         295.0,295.0 # the second probe point (x,y)
-leveling-strategy.three-point-leveling.point3         0.0,295.0   # the third probe point (x,y)
-leveling-strategy.three-point-leveling.home_first     true        # home the XY axis before probing
-leveling-strategy.three-point-leveling.tolerance      0.03        # the probe tolerance in mm, anything less that this will be ignored, default is 0.03mm
-leveling-strategy.three-point-leveling.probe_offsets  0,0,0       # the probe offsets from nozzle, must be x,y,z, default is no offset
-leveling-strategy.three-point-leveling.save_plane     false       # set to true to allow the bed plane to be saved with M500 default is false
+#leveling-strategy.three-point-leveling.enable         true        # a leveling strategy that probes three points to define a plane and keeps the Z parallel to that plane
+#leveling-strategy.three-point-leveling.point1         255.0,40.0   # the first probe point (x,y) optional may be defined with M557
+#leveling-strategy.three-point-leveling.point2         255.0,255.0 # the second probe point (x,y)
+#leveling-strategy.three-point-leveling.point3         40.0,255.0   # the third probe point (x,y)
+#leveling-strategy.three-point-leveling.home_first     true        # home the XY axis before probing
+#leveling-strategy.three-point-leveling.tolerance      0.03        # the probe tolerance in mm, anything less that this will be ignored, default is 0.03mm
+#leveling-strategy.three-point-leveling.probe_offsets  0,0,0       # the probe offsets from nozzle, must be x,y,z, default is no offset
+#leveling-strategy.three-point-leveling.save_plane     false       # set to true to allow the bed plane to be saved with M500 default is false
+
+leveling-strategy.rectangular-grid.enable               true      # The strategy must be enabled in the config, as well as the zprobe module.
+leveling-strategy.rectangular-grid.x_size               210       # size of bed in the X axis
+leveling-strategy.rectangular-grid.y_size               200       # size of bed in the Y axis
+leveling-strategy.rectangular-grid.size                 9         # The size of the grid, for example, 7 causes a 7x7 grid with 49 points.
+                                                                  # Must be an odd number.
+leveling-strategy.rectangular-grid.probe_offsets        27,-6,0   # Optional probe offsets from the nozzle or tool head
+leveling-strategy.rectangular-grid.save                 true      # If the saved grid is to be loaded on boot then this must be set to true
+leveling-strategy.rectangular-grid.initial_height       10        # Optionally an initial_height can be set that tell the intial probe
+                                                                  # where to stop the fast decent before it probes, this should be
+                                                                  # around 5-10mm above the bed
+leveling-strategy.rectangular-grid.do_home              false
+
 
 ## Panel
 # See http://smoothieware.org/panel
